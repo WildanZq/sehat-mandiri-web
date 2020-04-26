@@ -10,5 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
     login
+    <form action="<?= base_url('auth'); ?>" method="post">
+    	id
+    	<input type="text" name="id">
+    	password
+    	<input type="text" name="password">
+    	<input type="submit" name="klik">
+    </form>	
 </body>
 </html>
