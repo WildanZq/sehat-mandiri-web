@@ -9,6 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sehat Mandiri</title>
 </head>
 <body>
-    wildan cupu
+    login
 </body>
 </html>
