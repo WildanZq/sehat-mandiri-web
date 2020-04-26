@@ -9,13 +9,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sehat Mandiri</title>
 </head>
 <body>
-    login
-    <form action="<?= base_url('auth'); ?>" method="post">
-    	id
-    	<input type="text" name="id">
-    	password
-    	<input type="text" name="password">
-    	<input type="submit" name="klik">
-    </form>	
+
+    <form method="POST" action="<?php echo site_url('Auth/login_perawat'); ?>">
+    	<?php echo $this->session->flashdata('pesan'); ?>
+    	<input type="text" name="username"><br>
+    	<input type="password" name="password"><br>
+    	<input type="submit" value="LOGIN">
+    </form>
 </body>
 </html>
