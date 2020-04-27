@@ -4,12 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pasien extends CI_Controller {
     public function __construct() {
 		parent::__construct();
+		if (! $this->session->userdata('logged_in')) {
+            redirect('auth');
+            return;
+        }
 		$this->load->model('pasien_model');
     }
     
     public function registrasi() {
     	if ($this->session->userdata('role') != 'perawat') {
-    		redirect('Home');
+			redirect('Home');
+			return;
     	}
 		$this->load->view('pasien/registrasi_view');
 	}
@@ -32,6 +37,7 @@ class Pasien extends CI_Controller {
 		if (! $this->pasien_model->createPasien($array)) {
 			$this->session->set_flashdata('danger','Pasien gagal didaftarkan');
 			redirect('pasien/registrasi');
+			return;
 		}
 
 		$this->session->set_flashdata('success','Pasien berhasil didaftarkan');

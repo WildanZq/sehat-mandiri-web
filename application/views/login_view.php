@@ -9,11 +9,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sehat Mandiri</title>
 </head>
 <body>
-    <form method="POST" action="<?php echo site_url('auth/loginPerawat'); ?>">
-    	<?php echo $this->session->flashdata('danger'); ?>
-    	<?php echo $this->session->flashdata('success'); ?>
-    	<input type="text" name="username"><br>
-    	<input type="password" name="password"><br>
+    <?php echo $this->session->flashdata('danger'); ?>
+    <?php echo $this->session->flashdata('success'); ?>
+    <a href="perawat/registrasi">Registrasi perawat</a>
+    <h1>Login Perawat</h1>
+    <form method="POST" action="<?php echo base_url('auth/loginPerawat'); ?>">
+    	<input type="text" name="username" placeholder="Username"><br>
+    	<input type="password" name="password" placeholder="Password"><br>
+    	<input type="submit" value="LOGIN">
+    </form>
+    <h1>Login Pasien</h1>
+    <form method="POST" action="<?php echo base_url('auth/loginPasien'); ?>">
+    	<input type="text" name="no_hp" placeholder="No Hp"><br>
+    	<input type="password" name="password" placeholder="Password"><br>
     	<input type="submit" value="LOGIN">
     </form>
 </body>
