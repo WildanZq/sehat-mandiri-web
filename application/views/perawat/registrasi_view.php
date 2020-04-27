@@ -9,7 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sehat Mandiri</title>
 </head>
 <body>
-
     <form method="POST" action="<?php echo site_url('perawat/createPerawat'); ?>">
         <?php echo $this->session->flashdata('danger'); ?>
         <input type="text" name="username" placeholder="username"><br>

@@ -7,8 +7,8 @@ class Pasien extends CI_Controller {
 		$this->load->model('pasien_model');
     }
     
-    public function registrasi(){
-    	if($this->session->userdata('role') != 'perawat'){
+    public function registrasi() {
+    	if ($this->session->userdata('role') != 'perawat') {
     		redirect('Home');
     	}
 		$this->load->view('pasien/registrasi_view');
@@ -29,7 +29,11 @@ class Pasien extends CI_Controller {
 			'password' => $password,
 			'id_perawat' => $this->session->userdata('id') 
 		);
-		$this->pasien_model->createPasien($array);
+		if (! $this->pasien_model->createPasien($array)) {
+			$this->session->set_flashdata('danger','Pasien gagal didaftarkan');
+			redirect('pasien/registrasi');
+		}
+
 		$this->session->set_flashdata('success','Pasien berhasil didaftarkan');
 		redirect('Home');
 	}
