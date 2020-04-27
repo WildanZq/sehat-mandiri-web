@@ -3,77 +3,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct();
-		$this->load->model('m_perawat');
+		$this->load->model('perawat_model');
 	}
 
 	public function index() {
-		if($this->session->userdata('nama')){
-			$this->load->view('v_test');
+		if ($this->session->userdata('logged_in')) {
+			redirect('home');
 		} else {
-			$this->load->view('v_login');
-			// redirect('Auth');
+			$this->load->view('login_view');
 		}
-		
 	}
 
-	public function registrasi(){
-		$this->load->view('v_registrasiPerawat');
-	}
-
-
-	public function registrasi_perawat(){
-		$username = $this->input->post('username');
-		$password = $this->enkripsi($this->input->post('password'));
-		$nama_perawat = $this->input->post('nama_perawat');
-
-		$array = array(
-			'username' => $username,
-			'password' => $password,
-			'nama_perawat' => $nama_perawat,
-		);
-		$this->m_perawat->createPerawat($array);
-		redirect('Auth');
-	}
-
-
-	public function login_perawat(){
+	public function login_perawat() {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$get = $this->m_perawat->getPerawatByUsername($username);
-		if($get){
-			if (password_verify($password, $get->password)) {
-				$array = array(
-					'Role' => 'perawat',
-					'id'  => $get->id_perawat,
-					'username' =>$get->username,
-					'nama' =>$get->nama_perawat,
-					'logged_in' => true,
-
-				);
-		    	$this->session->set_userdata($array);
-		    	redirect('Auth');
-			} else {
-		      $this->session->flashdata('pesan','Gagal login password salah');
-			    redirect('Auth');
-			}
-		} else {
-			$this->session->flashdata('pesan','Gagal login data tidak ditemukan');
-			redirect('Auth');
+		$perawat = $this->perawat_model->getPerawatByUsername($username);
+		if (! $perawat){
+			$this->session->set_flashdata('danger','Gagal login username tidak ditemukan');
+			redirect('auth');
+			return;
 		}
+
+		if (! password_verify($password, $perawat->password)) {
+			$this->session->set_flashdata('danger','Gagal login password salah');
+			redirect('auth');
+			return;
+		}
+
+		$array = array(
+			'role' => 'perawat',
+			'id'  => $perawat->id_perawat,
+			'username' => $perawat->username,
+			'nama' => $perawat->nama_perawat,
+			'logged_in' => true,
+		);
+		$this->session->set_userdata($array);
+		redirect('auth');
 	}
 	
-	public function logout(){
+	public function logout() {
 		session_destroy();
-		redirect('Auth');		
-	} 
-
-
-	public function enkripsi($password){
-		return password_hash($password, PASSWORD_DEFAULT);
+		redirect('auth');		
 	}
-
-	
 
 }
