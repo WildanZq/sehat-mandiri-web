@@ -22,6 +22,7 @@ class Perawat extends CI_Controller {
 			'nama_perawat' => $nama_perawat,
 		);
 		$this->perawat_model->createPerawat($array);
+		$this->session->set_flashdata('success','Anda berhasil daftar');
 		redirect('Auth');
 	}
 }

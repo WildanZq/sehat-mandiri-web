@@ -10,8 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
-    <form method="POST" action="<?php echo site_url('auth/login_perawat'); ?>">
+    <form method="POST" action="<?php echo site_url('auth/loginPerawat'); ?>">
     	<?php echo $this->session->flashdata('danger'); ?>
+    	<?php echo $this->session->flashdata('success'); ?>
     	<input type="text" name="username"><br>
     	<input type="password" name="password"><br>
     	<input type="submit" value="LOGIN">

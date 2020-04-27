@@ -16,7 +16,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	public function login_perawat() {
+	public function loginPerawat() {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$perawat = $this->perawat_model->getPerawatByUsername($username);
