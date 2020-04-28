@@ -10,7 +10,17 @@ class Auth extends CI_Controller {
 
 	public function index() {
 		if ($this->session->userdata('logged_in')) {
-			redirect('home');
+			switch ($this->session->userdata('role')) {
+				case 'perawat':
+					redirect('perawat');
+					break;
+				case 'pasien':
+					redirect('pasien');
+					break;
+				default:
+					redirect('auth/logout');
+					break;
+			}
 		} else {
 			$this->load->view('login_view');
 		}

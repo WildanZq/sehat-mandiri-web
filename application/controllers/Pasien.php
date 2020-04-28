@@ -9,14 +9,14 @@ class Pasien extends CI_Controller {
             return;
         }
 		$this->load->model('pasien_model');
-    }
-    
-    public function registrasi() {
-    	if ($this->session->userdata('role') != 'perawat') {
-			redirect('Home');
-			return;
-    	}
-		$this->load->view('pasien/registrasi_view');
+	}
+	
+	public function index() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+        }
+		$this->load->view('pasien/home_view');
 	}
 
 	public function createPasien() {
@@ -41,6 +41,6 @@ class Pasien extends CI_Controller {
 		}
 
 		$this->session->set_flashdata('success','Pasien berhasil didaftarkan');
-		redirect('Home');
+		redirect('perawat');
 	}
 }

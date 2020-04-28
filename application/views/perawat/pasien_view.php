@@ -9,10 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Sehat Mandiri</title>
 </head>
 <body>
-    <a href="<?php echo base_url('home'); ?>">Home</a>
+    <a href="<?php echo base_url('perawat'); ?>">Home</a>
     <h1>Daftar Pasien</h1>
     <p>getPasienByIdPerawat</p>
     <?php print_r($pasien); ?>
-    <a href="detail_pasien?id=1">Detail pasien</a>
+    <a href="detailPasien?id=1">Detail pasien</a>
 </body>
 </html>

@@ -1,0 +1,67 @@
+:root {
+    --primary-color: #00B0FF;
+    --h-spacing: 3.4rem;
+}
+.h-100 {
+    min-height: 100vh !important;
+}
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+.login-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.login-tab {
+    position: absolute;
+    top: -43px;
+    left: 0;
+    display: flex;
+}
+.login-tab button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: .6rem 1.4rem;
+    border: none;
+    filter: opacity(.6);
+}
+.login-tab button:hover, .login-tab button.active {
+    filter: none;
+}
+.btn {
+    font-weight: bold;
+    padding: .375rem 1.5rem;
+    border-radius: 0;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+.logo {
+    width: 140px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 18px;
+}
+.logo.absolute {
+    top: 2rem;
+    left: var(--h-spacing);
+}
+.home-doc-img {
+    position: absolute;
+    bottom: 0;
+    left: var(--h-spacing);
+    height: 60%;
+}
+
+@media screen and (max-width: 767px) {
+    :root {
+        --h-spacing: 1.5rem;
+    }
+}
