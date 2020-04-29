@@ -19,4 +19,18 @@ class pasien_model extends CI_Model {
 		if ($this->db->affected_rows() == 0) return false;
         return true;
 	}
+
+	function getPasienByIdPerawat($idPerawat){
+		return $this->db
+		->where('id_perawat', $this->db->escape_str($idPerawat))
+		->get('pasien')
+		->result();
+	}
+
+	function getPasienById($id){
+		return $this->db
+		->where('id_pasien', $this->db->escape_str($id))
+		->get('pasien')
+		->row();	
+	}
 }

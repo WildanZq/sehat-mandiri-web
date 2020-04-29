@@ -30,7 +30,7 @@ class Perawat extends CI_Controller {
         }
         $this->load->model('pasien_model');
         $idPerawat = $this->session->userdata('id');
-        $pasien = $this->perawat_model->getPasienByIdPerawat($idPerawat);
+        $pasien = $this->pasien_model->getPasienByIdPerawat($idPerawat);
         $data = [
         	'pasien' => $pasien
         ];
@@ -46,8 +46,9 @@ class Perawat extends CI_Controller {
         // getPasienById (id dari parameter $id)
         // load model laporan
         // getLaporanByIdPasien
+        $pasien = $this->pasien_model->getPasienById($id);
         $data = [
-            'pasien' => [],
+            'pasien' => $pasien,
             'laporan' => []
         ];
         $this->load->view('perawat/detail_pasien_view.php', $data);
