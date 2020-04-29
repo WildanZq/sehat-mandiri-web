@@ -36,13 +36,13 @@ class Perawat extends CI_Controller {
         $this->load->view('perawat/pasien_view.php', $data);
 	}
 
-	public function detailPasien() {
+	public function detailPasien($id) {
         if ($this->session->userdata('role') != 'perawat') {
             redirect('auth');
             return;
         }
         $this->load->model('pasien_model');
-        // getPasienById (id dari GET)
+        // getPasienById (id dari parameter $id)
         // load model laporan
         // getLaporanByIdPasien
         $data = [

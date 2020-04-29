@@ -34,6 +34,9 @@
     padding: .375rem 1.5rem;
     border-radius: 0;
 }
+.form-control {
+    border-radius: 0;
+}
 .relative {
     position: relative;
 }
@@ -41,13 +44,8 @@
     position: absolute;
 }
 .logo {
-    width: 140px;
+    width: auto;
     height: 60px;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 18px;
 }
 .logo.absolute {
     top: 2rem;

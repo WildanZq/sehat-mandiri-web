@@ -13,6 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <h1>Daftar Pasien</h1>
     <p>getPasienByIdPerawat</p>
     <?php print_r($pasien); ?>
-    <a href="detailPasien?id=1">Detail pasien</a>
+    <a href="detailPasien/1">Detail pasien</a>
 </body>
 </html>
