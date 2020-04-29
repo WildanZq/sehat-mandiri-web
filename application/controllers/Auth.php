@@ -6,6 +6,7 @@ class Auth extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('perawat_model');
+		$this->load->model('pasien_model');
 	}
 
 	public function index() {
@@ -53,6 +54,34 @@ class Auth extends CI_Controller {
 		redirect('auth');
 	}
 	
+public function loginPasien() {
+		$noHp = $this->input->post('no_hp');
+		$password = $this->input->post('password');
+		$pasien = $this->pasien_model->getPasienByNoHp($noHp);
+		if (! $pasien){
+			$this->session->set_flashdata('danger','Gagal login username tidak ditemukan');
+			redirect('auth');
+			return;
+		}
+
+		if (! password_verify($password, $pasien->password)) {
+			$this->session->set_flashdata('danger','Gagal login password salah');
+			redirect('auth');
+			return;
+		}
+
+		$array = array(
+			'role' => 'pasien',
+			'no_hp'  => $pasien->no_hp,
+			'nama_pasien' => $pasien->nama_pasien,
+			'jenis_kelamin' => $pasien->jk,
+			'usia' => $pasien->usia,
+			'logged_in' => true,
+		);
+		$this->session->set_userdata($array);
+		redirect('auth');
+	}
+
 	public function logout() {
 		session_destroy();
 		redirect('auth');		

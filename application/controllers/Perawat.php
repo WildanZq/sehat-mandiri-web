@@ -29,9 +29,10 @@ class Perawat extends CI_Controller {
             return;
         }
         $this->load->model('pasien_model');
-        // getPasienByIdPerawat
+        $idPerawat = $this->session->userdata('id');
+        $pasien = $this->perawat_model->getPasienByIdPerawat($idPerawat);
         $data = [
-            'pasien' => []
+        	'pasien' => $pasien
         ];
         $this->load->view('perawat/pasien_view.php', $data);
 	}
