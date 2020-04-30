@@ -14,14 +14,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <img class="logo absolute" src="<?php echo base_url('assets\icon\logo.svg'); ?>" alt="LOGO">
     <nav>
         <div class="nav-wrapper">
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/registrasiPasien'); ?>">Tambah Pasien</a>
+            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat'); ?>">Pasien</a>
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/akun'); ?>">
                 <?php echo $this->session->userdata('nama'); ?>
             </a>
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>
         </div>
     </nav>
-    <div class="w-100 px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative">
+    <div class="w-100 px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative pb-4">
         <h1 class="display-3 mt-5 pt-5 mb-2 mb-md-3">Daftar Pasien</h1>
         <?php
         if ($this->session->flashdata('success')) {
@@ -35,8 +35,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 echo "
                 <div class=\"col-lg-3 col-md-4\">
                     <div class=\"card pasien-card shadow-sm\">
-                        <div class=\"card-header bg-primary pt-3\">
-                            <h3 class=\"h5 w-100 text-truncate mb-1\">$value->nama_pasien</h3>
+                        <div class=\"card-header bg-primary pt-4\">
+                            <h3 class=\"h5 w-100 text-truncate mb-2\">$value->nama_pasien</h3>
                         </div>
                         <div class=\"card-body\">
                             <table class=\"w-100\">
@@ -53,6 +53,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ";
             }
             ?>
+            <a href="<?php echo base_url('perawat/registrasiPasien'); ?>" class="col-lg-3 col-md-4 decoration-0">
+                <div class="card pasien-card shadow-sm create shadow">
+                    <span class="font-weight-bold h5">Tambah Pasien</span>
+                </div>
+            </a>
         </div>
     </div>
 </body>

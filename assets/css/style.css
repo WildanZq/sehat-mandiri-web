@@ -7,7 +7,7 @@
 body {
     background-color: var(--bg-color);
 }
-.h-100 {
+.h-100vh {
     min-height: 100vh !important;
 }
 .bg-primary, .btn-primary {
@@ -72,7 +72,7 @@ body {
 }
 nav {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     top: calc(var(--v-spacing) + .9rem);
     right: var(--h-spacing);
 }
@@ -84,6 +84,21 @@ nav .nav-wrapper a {
     border-radius: .2rem;
     overflow: hidden;
 }
+.pasien-card.create {
+    height: 199px;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 1.2rem 0;
+}
+.pasien-card.create:hover {
+    filter: brightness(.95);
+}
+a.decoration-0:hover {
+    text-decoration: none;
+}
 .pasien-card .card-header {
     border-radius: 0 0 1.2rem 0;
 }
@@ -92,6 +107,9 @@ nav .nav-wrapper a {
 }
 .pasien-card .card-body td:last-child {
     text-align: right;
+}
+.form-sm {
+    max-width: 520px;
 }
 
 @media screen and (max-width: 767px) {

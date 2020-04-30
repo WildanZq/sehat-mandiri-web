@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
     <img class="logo absolute" src="<?php echo base_url('assets\icon\logo.svg'); ?>" alt="LOGO">
-    <div class="w-100 h-100 px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative">
+    <div class="w-100 h-100vh px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative">
         <h1 class="display-3 mt-5 pt-5 mb-2">Periksa di Rumah</h1>
         <p>Bergabung sekarang untuk dapat memantau kondisi pasien setiap hari secara daring</p>
         <img class="home-doc-img" src="<?php echo base_url('assets\img\doctors.svg'); ?>" alt="doctor">
