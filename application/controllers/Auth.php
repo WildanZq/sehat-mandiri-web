@@ -72,6 +72,7 @@ public function loginPasien() {
 
 		$array = array(
 			'role' => 'pasien',
+			'id' => $pasien->id_pasien,
 			'no_hp'  => $pasien->no_hp,
 			'nama_pasien' => $pasien->nama_pasien,
 			'jenis_kelamin' => $pasien->jk,

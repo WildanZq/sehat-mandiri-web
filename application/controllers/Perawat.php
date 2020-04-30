@@ -11,8 +11,14 @@ class Perawat extends CI_Controller {
 		if ($this->session->userdata('role') != 'perawat') {
 			redirect('auth');
 			return;
-    	}
-		$this->load->view('perawat/home_view');
+		}
+		$this->load->model('pasien_model');
+        $idPerawat = $this->session->userdata('id');
+        $pasien = $this->pasien_model->getPasienByIdPerawat($idPerawat);
+        $data = [
+        	'pasien' => $pasien
+        ];
+		$this->load->view('perawat/home_view', $data);
 	}
 
 	public function registrasiPasien() {
@@ -21,20 +27,6 @@ class Perawat extends CI_Controller {
 			return;
     	}
 		$this->load->view('pasien/registrasi_view');
-	}
-
-	public function pasien() {
-        if ($this->session->userdata('role') != 'perawat') {
-            redirect('auth');
-            return;
-        }
-        $this->load->model('pasien_model');
-        $idPerawat = $this->session->userdata('id');
-        $pasien = $this->pasien_model->getPasienByIdPerawat($idPerawat);
-        $data = [
-        	'pasien' => $pasien
-        ];
-        $this->load->view('perawat/pasien_view.php', $data);
 	}
 
 	public function detailPasien($id) {

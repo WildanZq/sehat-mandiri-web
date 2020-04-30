@@ -1,12 +1,29 @@
 :root {
     --primary-color: #00B0FF;
+    --bg-color: #f7f7f7;
     --h-spacing: 3.4rem;
+    --v-spacing: 2rem;
+}
+body {
+    background-color: var(--bg-color);
 }
 .h-100 {
     min-height: 100vh !important;
 }
-.bg-primary {
+.bg-primary, .btn-primary {
     background-color: var(--primary-color) !important;
+    border-color: var(--primary-color);
+    color: white;
+    transition: filter .5s;
+}
+.btn-primary:hover {
+    border-color: var(--primary-color);
+    filter: brightness(.9);
+}
+.btn {
+    font-weight: bold;
+    padding: .375rem 1.5rem;
+    border-radius: 0 0 1rem 0;
 }
 .login-wrapper {
     position: absolute;
@@ -29,11 +46,6 @@
 .login-tab button:hover, .login-tab button.active {
     filter: none;
 }
-.btn {
-    font-weight: bold;
-    padding: .375rem 1.5rem;
-    border-radius: 0;
-}
 .form-control {
     border-radius: 0;
 }
@@ -48,7 +60,8 @@
     height: 60px;
 }
 .logo.absolute {
-    top: 2rem;
+    z-index: 1;
+    top: var(--v-spacing);
     left: var(--h-spacing);
 }
 .home-doc-img {
@@ -56,6 +69,29 @@
     bottom: 0;
     left: var(--h-spacing);
     height: 60%;
+}
+nav {
+    z-index: 1;
+    position: absolute;
+    top: calc(var(--v-spacing) + .9rem);
+    right: var(--h-spacing);
+}
+nav .nav-wrapper a {
+    margin: 0 .2rem;
+}
+.pasien-card {
+    margin-bottom: 1rem;
+    border-radius: .2rem;
+    overflow: hidden;
+}
+.pasien-card .card-header {
+    border-radius: 0 0 1.2rem 0;
+}
+.pasien-card .card-body td:first-child {
+    font-weight: 600;
+}
+.pasien-card .card-body td:last-child {
+    text-align: right;
 }
 
 @media screen and (max-width: 767px) {
