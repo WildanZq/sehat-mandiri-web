@@ -38,10 +38,11 @@ class Perawat extends CI_Controller {
         // getPasienById (id dari parameter $id)
         // load model laporan
         // getLaporanByIdPasien
+        $laporan= $this->perawat_model->getLaporanByIdPasien($id);
         $pasien = $this->pasien_model->getPasienById($id);
         $data = [
             'pasien' => $pasien,
-            'laporan' => []
+            'laporan' => $laporan
         ];
         $this->load->view('perawat/detail_pasien_view.php', $data);
     }

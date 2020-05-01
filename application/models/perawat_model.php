@@ -20,4 +20,11 @@ class perawat_model extends CI_Model{
         return true;
 	}
 
+	function getLaporanByIdPasien($id){
+		return $this->db
+		->where('id_pasien', $this->db->escape_str($id))
+		->get('laporan')
+		->row();
+	}
+
 }

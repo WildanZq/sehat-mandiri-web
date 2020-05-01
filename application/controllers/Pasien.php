@@ -34,6 +34,7 @@ class Pasien extends CI_Controller {
 			'password' => $password,
 			'id_perawat' => $this->session->userdata('id') 
 		);
+		
 		if (! $this->pasien_model->createPasien($array)) {
 			$this->session->set_flashdata('danger','Pasien gagal didaftarkan');
 			redirect('pasien/registrasi');
@@ -43,4 +44,41 @@ class Pasien extends CI_Controller {
 		$this->session->set_flashdata('success','Pasien berhasil didaftarkan');
 		redirect('perawat');
 	}
+
+	public function addLaporan(){
+		$id_pasien = $this->input->post('id_pasien');
+		$suhu = $this->input->post('suhu');
+		$demam = $this->input->post('demam');
+		$batuk = $this->input->post('batuk');
+		$sesak = $this->input->post('sesak');
+		$tenggorokan = $this->input->post('tenggorokan');
+		$keluhan = $this->input->post('keluhan');
+
+		$array = array(
+			'id_pasien' => $id_pasien,
+			'suhu' => $suhu,
+			'demam' => $demam,
+			'batuk' => $batuk,
+			'sesak' => $sesak,
+			'tenggorokan' => $tenggorokan,
+			'keluhan' => $keluhan
+		);
+
+		if (! $this->pasien_model->addLaporan($array)) {
+			$this->session->set_flashdata('danger','laporan tidak ada');
+			redirect('pasien/terserah namae');
+			return;
+		}
+
+		$this->session->set_flashdata('success','laporan berhasil diproses');
+		redirect('pasien/terserah namae');
+	}
+
+	function deletePasien(){
+		$id = $this->uri->segment(3);
+		$where = array('id_pasien' => $id);
+		$this->pasien_model->deletePasien($where);
+		redirect('perawat','refresh');
+	}
+
 }

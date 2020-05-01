@@ -33,4 +33,18 @@ class pasien_model extends CI_Model {
 		->get('pasien')
 		->row();	
 	}
+
+	function addLaporan($array){
+		$this->db->insert('laporan', $this->service_model->escape_array($array));
+		if ($this->db->affected_rows() == 0) return false;
+        return true;
+	}
+
+	function deletePasien($data){
+		$this->db->delete('pasien',$data);
+		if ($this->db->affected_rows() == 0) return false;
+        return true;
+
+	}
+
 }

@@ -32,26 +32,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
             <div class="form-group">
                 <label for="no_hp">Nomor HP</label>
-                <input class="form-control" type="text" name="no_hp" placeholder="08xxxxxxxxxx" id="no_hp">
+                <input class="form-control" type="text" name="no_hp" placeholder="08xxxxxxxxxx" id="no_hp" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" type="password" name="password" placeholder="******" id="password">
+                <input class="form-control" type="password" name="password" placeholder="******" id="password" required>
             </div>
             <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
-                <input class="form-control" type="text" name="nama_pasien" placeholder="Doni" id="nama">
+                <input class="form-control" type="text" name="nama_pasien" placeholder="Doni" id="nama" required>
             </div>
             <div class="form-group">
                 <label for="jk">Jenis Kelamin</label>
-                <select class="form-control" name="jenis_kelamin" id="jk">
+                <select class="form-control" name="jenis_kelamin" id="jk" required>
                     <option value="1">Laki-laki</option>
                     <option value="0">Perempuan</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="usia">Usia</label>
-                <input class="form-control" type="number" name="usia" placeholder="30" id="usia">
+                <input class="form-control" type="number" name="usia" placeholder="30" id="usia" required>
             </div>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-warning shadow" type="submit">Tambah</button>
