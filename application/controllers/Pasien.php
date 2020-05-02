@@ -56,12 +56,12 @@ class Pasien extends CI_Controller {
 
 		$array = array(
 			'id_pasien' => $id_pasien,
-			'suhu' => $suhu,
+			'suhu_tubuh' => $suhu,
 			'demam' => $demam,
-			'batuk' => $batuk,
-			'sesak' => $sesak,
-			'tenggorokan' => $tenggorokan,
-			'keluhan' => $keluhan
+			'batuk_pilek' => $batuk,
+			'sesak_nafas' => $sesak,
+			'sakit_tenggorokan' => $tenggorokan,
+			'lainnya' => $keluhan
 		);
 
 		if (! $this->pasien_model->addLaporan($array)) {
@@ -81,4 +81,19 @@ class Pasien extends CI_Controller {
 		redirect('perawat','refresh');
 	}
 
+	function pesan(){
+		$id_pasien = $this->input->post('id_pasien');
+		$pesan = $this->input->post('pesan');
+		$data = $this->pasien_model->getPasienById($id_pasien);
+		$pengirim = array('id_pasien' => $id_pasien, 
+						  'id_perawat' => $data->id_perawat,
+						  'pesan' => $pesan
+						  'pengirim' => 'pasien'); 
+		$this->pasien_model->mengirimPesan($pengirim);
+	}
+
+	function tampilkanPesanDisisiPasien(){
+		$id_pasien = $this->input->post('id_pasien');
+		$this->model_pasien->tampilkanPesanPasient($id_pasien);
+	} 
 }

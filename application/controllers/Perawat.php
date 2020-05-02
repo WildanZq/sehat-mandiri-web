@@ -74,4 +74,38 @@ class Perawat extends CI_Controller {
 		$this->session->set_flashdata('success','Anda berhasil daftar');
 		redirect('Auth');
 	}
+
+
+	public function gantiPassword(){
+		$id_perawat = $this->input->post('id_perawat');
+		$passwordBaru = $this->input->post('pass_baru');
+		$passwordLama = $this->input->post('pass_lama');
+		$perawat = $this->perawat_model->getPerawatById($id_perawat);
+		if(password_verify($passwordBaru, $perawat->password)){
+			$pass = array('password' => $passwordBaru);	
+			$where = array('id_pasien' => $id);
+			$this->perawat_model->gantiPassword($pass,$where);
+			$this->session->set_flashdata('succes','password diperbarui');
+		}else{
+			$this->session->set_flashdata('gagal','password tidak valid');
+		}
+		
+	} 
+
+	function pesan(){
+		$id_perawat = $this->input->post('id_perawat');
+		$pesan = $this->input->post('pesan');
+		$id_pasien = $this->input->post('id_pasien');
+		$pengirim = array('id_pasien' => $id_pasien, 
+						  'id_perawat' => $id_perawat,
+						  'pesan' => $pesan
+						  'pengirim' => 'perawat'); 
+		$this->pasien_model->mengirimPesan($pengirim);
+	}
+
+	function tampilkanPesanDisisiPerawat(){
+		$id_perawat = $this->input->post('id_perawat');
+		$this->model_perawat->tampilkanPesanPerawat($id_perawat);
+	} 
+
 }
