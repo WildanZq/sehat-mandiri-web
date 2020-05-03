@@ -87,7 +87,7 @@ class Pasien extends CI_Controller {
 		$data = $this->pasien_model->getPasienById($id_pasien);
 		$pengirim = array('id_pasien' => $id_pasien, 
 						  'id_perawat' => $data->id_perawat,
-						  'pesan' => $pesan
+						  'pesan' => $pesan,
 						  'pengirim' => 'pasien'); 
 		$this->pasien_model->mengirimPesan($pengirim);
 	}

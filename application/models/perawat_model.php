@@ -42,7 +42,7 @@ class perawat_model extends CI_Model{
 
 	function tampilkanPesanPerawat($id_perawat, $id_pasien){//karena perawat bisa punya banyak pesien tapi pasien punya satu perawat
 		return $this->db
-		->get_where('pesan', array('id_perawat' => $id_perawat,'id_pasien' => $id_pasien) );
+		->get_where('pesan', array('id_perawat' => $id_perawat,'id_pasien' => $id_pasien) )
 		->row();
 	}
 

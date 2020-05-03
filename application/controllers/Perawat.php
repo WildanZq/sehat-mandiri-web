@@ -98,7 +98,7 @@ class Perawat extends CI_Controller {
 		$id_pasien = $this->input->post('id_pasien');
 		$pengirim = array('id_pasien' => $id_pasien, 
 						  'id_perawat' => $id_perawat,
-						  'pesan' => $pesan
+						  'pesan' => $pesan,
 						  'pengirim' => 'perawat'); 
 		$this->pasien_model->mengirimPesan($pengirim);
 	}
