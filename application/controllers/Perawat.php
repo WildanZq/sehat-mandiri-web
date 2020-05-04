@@ -92,20 +92,5 @@ class Perawat extends CI_Controller {
 		
 	} 
 
-	function pesan(){
-		$id_perawat = $this->input->post('id_perawat');
-		$pesan = $this->input->post('pesan');
-		$id_pasien = $this->input->post('id_pasien');
-		$pengirim = array('id_pasien' => $id_pasien, 
-						  'id_perawat' => $id_perawat,
-						  'pesan' => $pesan,
-						  'pengirim' => 'perawat'); 
-		$this->pasien_model->mengirimPesan($pengirim);
-	}
-
-	function tampilkanPesanDisisiPerawat(){
-		$id_perawat = $this->input->post('id_perawat');
-		$this->model_perawat->tampilkanPesanPerawat($id_perawat);
-	} 
 
 }

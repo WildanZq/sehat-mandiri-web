@@ -34,11 +34,6 @@ class pasien_model extends CI_Model {
 		->row();	
 	}
 
-	function addLaporan($array){
-		$this->db->insert('laporan', $this->service_model->escape_array($array));
-		if ($this->db->affected_rows() == 0) return false;
-        return true;
-	}
 
 	function deletePasien($data){
 		$this->db->delete('pasien',$data);
@@ -47,17 +42,5 @@ class pasien_model extends CI_Model {
 
 	}
 
-	function mengirimPesan($data){
-		$this->db->insert('pesan',$data);
-		if ($this->db->affected_rows() == 0) return false;
-        return true;
-	}
-
-	function tampilkanPesanPasient($id_pasien){
-		return $this->db
-		->where('id_pasien', $this->db->escape_str($id_pasien))
-		->get('pesan')
-		->row();
-	}
 
 }
