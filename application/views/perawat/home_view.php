@@ -13,13 +13,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
     <img class="logo absolute" src="<?php echo base_url('assets\icon\logo.svg'); ?>" alt="LOGO">
-    <nav>
-        <div class="nav-wrapper">
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat'); ?>">Pasien</a>
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/account'); ?>">
+    <nav class="mobile-nav" id="nav-mobile">
+        <div class="nav-mobile-wrapper">
+            <a class="mb-3 text-white font-weight-bold" href="<?php echo base_url('perawat'); ?>">Pasien</a>
+            <a class="mb-3 text-white font-weight-bold" href="<?php echo base_url('perawat/account'); ?>">
                 <?php echo $this->session->userdata('nama'); ?>
             </a>
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>
+            <a class="mb-3 text-white font-weight-bold" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>
+        </div>
+    </nav>
+    <nav class="nav">
+        <div class="nav-wrapper">
+            <div class="d-block d-md-none">
+                <button class="btn btn-sm btn-primary shadow nav-mobile-btn" id="nav-btn"><span></span></button>
+            </div>
+            <div class="d-none d-md-block">
+                <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat'); ?>">Pasien</a>
+                <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/account'); ?>">
+                    <?php echo $this->session->userdata('nama'); ?>
+                </a>
+                <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>
+            </div>
         </div>
     </nav>
     <div class="w-100 px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative pb-4">
@@ -66,5 +80,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
         </div>
     </div>
+    <script src="<?php echo base_url('assets/js/nav.js'); ?>"></script>
 </body>
 </html>
