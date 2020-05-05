@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class laporan_model extends CI_Model {
+class pesan_model extends CI_Model {
 	public function __construct() {
         parent::__construct();
         $this->load->model('service_model');

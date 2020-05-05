@@ -1,14 +1,18 @@
 :root {
     --primary-color: #00B0FF;
+    --secondary-color: #ffc107;
     --bg-color: #f7f7f7;
     --h-spacing: 3.4rem;
     --v-spacing: 2rem;
 }
-body {
+body, .bg-bg {
     background-color: var(--bg-color);
 }
 .h-100vh {
     min-height: 100vh !important;
+}
+.text-primary {
+    color: var(--primary-color);
 }
 .bg-primary, .btn-primary {
     background-color: var(--primary-color) !important;
@@ -54,6 +58,12 @@ body {
 }
 .absolute {
     position: absolute;
+}
+.fixed {
+    position: fixed;
+}
+.fixed-md {
+    position: fixed;
 }
 .logo {
     width: auto;
@@ -170,6 +180,62 @@ a.decoration-0:hover {
 .form-sm {
     max-width: 520px;
 }
+.detail-pasien-wrapper {
+    height: 100vh;
+    height: calc(100vh - 1rem);
+    padding-right: 45px;
+}
+.flex-2 {
+    flex: 2;
+}
+.pesan-wrapper {
+    border-radius: 0 1rem 0 0;
+}
+.pesan-container {
+    border-radius: 0 1rem 0 0;
+    display: flex;
+    flex-direction: column;
+}
+.pesan-out {
+    position: relative;
+    margin-left: 4rem;
+    text-align: right;
+    margin-bottom: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 1rem 1rem 0 1rem;
+    padding: .4rem .8rem;
+    display: inline-block;
+    align-self: flex-end;
+}
+.pesan-out::after {
+    content: var(--waktu);
+    position: absolute;
+    font-size: .8rem;
+    color: black;
+    top: 0;
+    right: 100%;
+    right: calc(100% + .5rem);
+}
+.pesan-in {
+    position: relative;
+    margin-right: 4rem;
+    margin-bottom: 4px;
+    background-color: var(--primary-color);
+    border-radius: 1rem 1rem 1rem 0;
+    padding: .4rem .8rem;
+    display: inline-block;
+    align-self: flex-start;
+    color: white;
+}
+.pesan-in::after {
+    content: var(--waktu);
+    position: absolute;
+    font-size: .8rem;
+    color: black;
+    top: 0;
+    left: 100%;
+    left: calc(100% + .5rem);
+}
 
 @media screen and (max-width: 767px) {
     :root {
@@ -177,5 +243,16 @@ a.decoration-0:hover {
     }
     .mobile-nav.active {
         height: 100vh;
+    }
+    .fixed-md {
+        position: relative;
+    }
+    .detail-pasien-wrapper {
+        padding-right: 15px;
+    }
+    .detail-pasien-wrapper {
+        height: 100vh;
+        height: calc(100vh - 1rem);
+        padding-right: 45px;
     }
 }

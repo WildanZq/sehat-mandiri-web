@@ -50,7 +50,7 @@ class Pasien extends CI_Controller {
 		redirect('perawat');
 	}
 
-	function deletePasien(){
+	function deletePasien() {
 		if ($this->session->userdata('role') != 'perawat') {
             redirect('auth');
             return;

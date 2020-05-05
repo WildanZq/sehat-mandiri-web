@@ -29,18 +29,27 @@ class Perawat extends CI_Controller {
 		$this->load->view('pasien/registrasi_view');
 	}
 
-	public function detailPasien($id) {
+	public function detailPasien() {
         if ($this->session->userdata('role') != 'perawat') {
             redirect('auth');
             return;
-        }
+		}
+		$id = $this->uri->segment(3);
+		$idPerawat = $this->session->userdata('id');
         $this->load->model('pasien_model');
-        $this->load->model('laporan_model');
-        $laporan= $this->laporan_model->getLaporanByIdPasien($id);
-        $pasien = $this->pasien_model->getPasienById($id);
+		$this->load->model('laporan_model');
+		$this->load->model('pesan_model');
+		$pasien = $this->pasien_model->getPasienById($id);
+		if ($pasien->id_perawat != $idPerawat) {
+			redirect('perawat');
+		}
+
+        $laporan = $this->laporan_model->getLaporanByIdPasien($id);
+        $pesan = $this->pesan_model->getPesanByIdPerawatAndIdPasien($idPerawat, $id);
         $data = [
             'pasien' => $pasien,
-            'laporan' => $laporan
+			'laporan' => $laporan,
+			'pesan' => $pesan
         ];
         $this->load->view('perawat/detail_pasien_view.php', $data);
     }

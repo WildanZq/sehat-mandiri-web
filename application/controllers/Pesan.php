@@ -2,12 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesan extends CI_Controller {
-	    public function __construct() {
+	public function __construct() {
 		parent::__construct();
 		if (! $this->session->userdata('logged_in')) {
             redirect('auth');
             return;
-        }
+		}
+		$this->load->model('pesan_model');
 	}
 
 	function createPesanPerawat() {
@@ -16,9 +17,20 @@ class Pesan extends CI_Controller {
             return;
 		}
 
+		
 		$id_perawat = $this->session->userdata('id');
 		$pesan = $this->input->post('pesan');
 		$id_pasien = $this->input->post('id_pasien');
+		if (! $id_pasien) {
+			$this->session->set_flashdata('danger', 'Pesan gagal dikirim');
+			redirect('perawat');
+			return;
+		}
+		if (! $pesan) {
+			redirect('perawat/detailPasien/'.$this->input->post('id_pasien'));
+			return;
+		}
+
 		$data = array(
 			'id_pasien' => $id_pasien, 
 			'id_perawat' => $id_perawat,
@@ -27,12 +39,12 @@ class Pesan extends CI_Controller {
 		);
 		if (! $this->pesan_model->createPesan($data)) {
 			$this->session->set_flashdata('danger', 'Pesan gagal dikirim');
-			redirect('perawat/pesan/'.$this->input->post('id_pasien'));
+			redirect('perawat/detailPasien/'.$this->input->post('id_pasien'));
 			return;
 		}
 
 		$this->session->set_flashdata('success', 'Pesan berhasil dikirim');
-		redirect('perawat/pesan/'.$this->input->post('id_pasien'));
+		redirect('perawat/detailPasien/'.$this->input->post('id_pasien'));
 	}
 
 	function createPesanPasien() {
