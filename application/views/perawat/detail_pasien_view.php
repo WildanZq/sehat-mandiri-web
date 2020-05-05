@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </tr>
                 </table>
                 <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto">
-                    <h2 class="h5 ml-2 mt-2 ml-md-3">Pesan</h2>
+                    <h2 class="h5 ml-1 mt-2">Pesan</h2>
                     <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-dark" id="pesan">
                         <?php
                         foreach ($pesan as $key => $value) {

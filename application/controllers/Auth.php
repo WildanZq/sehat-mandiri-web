@@ -74,9 +74,10 @@ public function loginPasien() {
 			'role' => 'pasien',
 			'id' => $pasien->id_pasien,
 			'no_hp'  => $pasien->no_hp,
-			'nama_pasien' => $pasien->nama_pasien,
+			'nama' => $pasien->nama_pasien,
 			'jenis_kelamin' => $pasien->jk,
 			'usia' => $pasien->usia,
+			'id_perawat' => $pasien->id_perawat,
 			'logged_in' => true,
 		);
 		$this->session->set_userdata($array);

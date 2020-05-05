@@ -17,7 +17,6 @@ class Pesan extends CI_Controller {
             return;
 		}
 
-		
 		$id_perawat = $this->session->userdata('id');
 		$pesan = $this->input->post('pesan');
 		$id_pasien = $this->input->post('id_pasien');
@@ -43,7 +42,6 @@ class Pesan extends CI_Controller {
 			return;
 		}
 
-		$this->session->set_flashdata('success', 'Pesan berhasil dikirim');
 		redirect('perawat/detailPasien/'.$this->input->post('id_pasien'));
 	}
 
@@ -54,22 +52,25 @@ class Pesan extends CI_Controller {
 		}
 
 		$id_pasien = $this->session->userdata('id');
+		$id_perawat = $this->session->userdata('id_perawat');
 		$pesan = $this->input->post('pesan');
-		$this->load->model('pasien_model');
-		$pasien = $this->pasien_model->getPasienById($id_pasien);
+		if (! $pesan) {
+			redirect('perawat/detailPasien/'.$this->input->post('id_pasien'));
+			return;
+		}
+
 		$data = array(
 			'id_pasien' => $id_pasien, 
-			'id_perawat' => $pasien->id_perawat,
+			'id_perawat' => $id_perawat,
 			'pesan' => $pesan,
 			'pengirim' => $this->session->userdata('role')
 		);
 		if (! $this->pesan_model->createPesan($data)) {
 			$this->session->set_flashdata('danger', 'Pesan gagal dikirim');
-			redirect('pasien/pesan');
+			redirect('pasien');
 			return;
 		}
 
-		$this->session->set_flashdata('success', 'Pesan berhasil dikirim');
-		redirect('pasien/pesan');
+		redirect('pasien');
 	} 
 }

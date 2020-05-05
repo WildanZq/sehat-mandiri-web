@@ -15,8 +15,20 @@ class Pasien extends CI_Controller {
 		if ($this->session->userdata('role') != 'pasien') {
             redirect('auth');
             return;
-        }
-		$this->load->view('pasien/home_view');
+		}
+		$this->load->model('pesan_model');
+		$this->load->model('laporan_model');
+		$this->load->model('perawat_model');
+		$idPasien = $this->session->userdata('id');
+		$pesan = $this->pesan_model->getPesanByIdPasien($idPasien);
+		$laporan = $this->laporan_model->getLaporanByIdPasien($idPasien);
+		$perawat = $this->perawat_model->getPerawatById($this->session->userdata('id_perawat'));
+		$data = [
+			'pesan' => $pesan,
+			'laporan' => $laporan,
+			'perawat' => $perawat,
+		];
+		$this->load->view('pasien/home_view', $data);
 	}
 
 	public function createPasien() {
