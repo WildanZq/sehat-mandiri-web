@@ -20,22 +20,17 @@ class perawat_model extends CI_Model{
         return true;
 	}
 
-	function getLaporanByIdPasien($id){
-		return $this->db
-		->where('id_pasien', $this->db->escape_str($id))
-		->get('laporan')
-		->row();
-	}
-
-	public function getPerawatById($id){
+	public function getPerawatById($id) {
 		return $this->db
 		->where('id_perawat', $this->db->escape_str($id))
 		->get('perawat')
 		->row();	
 	}
-	public function gantiPassword($password, $where){
+
+	public function changePassword($id, $password) {
 		return $this->db
-		->update('perawat', $password, $where);
+		->where('id_perawat', $this->db->escape_str($id))
+		->update('perawat', $this->db->escape_str($password));
 		if ($this->db->affected_rows() == 0) return false;
         return true;
 	}

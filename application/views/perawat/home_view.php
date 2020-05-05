@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <nav>
         <div class="nav-wrapper">
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat'); ?>">Pasien</a>
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/akun'); ?>">
+            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/account'); ?>">
                 <?php echo $this->session->userdata('nama'); ?>
             </a>
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>
@@ -27,6 +27,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php
         if ($this->session->flashdata('success')) {
             echo '<div class="alert alert-success mt-4" role="alert">'.$this->session->flashdata('success').'</div>';
+        }
+        ?>
+        <?php
+        if ($this->session->flashdata('danger')) {
+            echo '<div class="alert alert-danger mt-4" role="alert">'.$this->session->flashdata('danger').'</div>';
         }
         ?>
         <div class="pasien-wrapper row mt-4">

@@ -10,7 +10,12 @@ class Laporan extends CI_Controller {
         }
 	}
 
-	public function addLaporan(){
+	public function createLaporan(){
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
+
 		$id_pasien = $this->session->userdata('id');
 		$suhu = $this->input->post('suhu');
 		$demam = $this->input->post('demam');
@@ -29,14 +34,14 @@ class Laporan extends CI_Controller {
 			'lainnya' => $keluhan
 		);
 
-		if (! $this->laporan_model->addLaporan($array)) {
-			$this->session->set_flashdata('danger','laporan tidak ada');
-			redirect('pasien/terserah namae');
+		if (! $this->laporan_model->createLaporan($array)) {
+			$this->session->set_flashdata('danger','Laporan gagal ditambahkan');
+			redirect('pasien/createLaporan');
 			return;
 		}
 
-		$this->session->set_flashdata('success','laporan berhasil diproses');
-		redirect('pasien/terserah namae');
+		$this->session->set_flashdata('success','Laporan berhasil ditambahkan');
+		redirect('pasien');
 	}
 
 }

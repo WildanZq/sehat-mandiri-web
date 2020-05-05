@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <nav>
         <div class="nav-wrapper">
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat'); ?>">Pasien</a>
-            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/akun'); ?>">
+            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/account'); ?>">
                 <?php echo $this->session->userdata('nama'); ?>
             </a>
             <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('auth/logout'); ?>">Keluar</a>

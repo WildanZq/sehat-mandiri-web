@@ -35,10 +35,8 @@ class Perawat extends CI_Controller {
             return;
         }
         $this->load->model('pasien_model');
-        // getPasienById (id dari parameter $id)
-        // load model laporan
-        // getLaporanByIdPasien
-        $laporan= $this->perawat_model->getLaporanByIdPasien($id);
+        $this->load->model('laporan_model');
+        $laporan= $this->laporan_model->getLaporanByIdPasien($id);
         $pasien = $this->pasien_model->getPasienById($id);
         $data = [
             'pasien' => $pasien,
@@ -66,30 +64,42 @@ class Perawat extends CI_Controller {
 			'nama_perawat' => $nama_perawat,
 		);
 		if (! $this->perawat_model->createPerawat($array)) {
-			$this->session->set_flashdata('danger','Anda gagal daftar');
+			$this->session->set_flashdata('danger', 'Anda gagal daftar');
 			redirect('Auth/registrasi');
 			return;
 		}
 
-		$this->session->set_flashdata('success','Anda berhasil daftar');
+		$this->session->set_flashdata('success', 'Anda berhasil daftar');
 		redirect('Auth');
 	}
 
 
-	public function gantiPassword(){
-		$id_perawat = $this->input->post('id_perawat');
+	public function changePassword() {
+		if ($this->session->userdata('role') != 'perawat') {
+            redirect('auth');
+            return;
+		}
+
+		$id = $this->session->userdata('id');
 		$passwordBaru = $this->input->post('pass_baru');
 		$passwordLama = $this->input->post('pass_lama');
 		$perawat = $this->perawat_model->getPerawatById($id_perawat);
-		if(password_verify($passwordBaru, $perawat->password)){
-			$pass = array('password' => $passwordBaru);	
-			$where = array('id_pasien' => $id);
-			$this->perawat_model->gantiPassword($pass,$where);
-			$this->session->set_flashdata('succes','password diperbarui');
-		}else{
-			$this->session->set_flashdata('gagal','password tidak valid');
+
+		if (! password_verify($passwordBaru, $perawat->password)) {
+			$this->session->set_flashdata('danger', 'Password tidak valid');
+			redirect('perawat/account');
+			return;
 		}
-		
+
+		$password = password_hash($passwordBaru, PASSWORD_DEFAULT);
+		if (! $this->perawat_model->changePassword($id, $password)) {
+			$this->session->set_flashdata('danger', 'Password gagal diganti');
+			redirect('perawat/account');
+			return;
+		}
+
+		$this->session->set_flashdata('success', 'Password berhasil diganti');
+		redirect('perawat/account');
 	} 
 
 

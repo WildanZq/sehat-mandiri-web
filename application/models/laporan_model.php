@@ -7,10 +7,17 @@ class laporan_model extends CI_Model {
         $this->load->model('service_model');
 	}
 
-	function addLaporan($array){
+	function createLaporan($array){
 		$this->db->insert('laporan', $this->service_model->escape_array($array));
 		if ($this->db->affected_rows() == 0) return false;
         return true;
+	}
+
+	function getLaporanByIdPasien($id){
+		return $this->db
+		->where('id_pasien', $this->db->escape_str($id))
+		->get('laporan')
+		->result();
 	}
 
 }

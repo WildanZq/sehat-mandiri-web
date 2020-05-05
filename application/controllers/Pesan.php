@@ -10,35 +10,54 @@ class Pesan extends CI_Controller {
         }
 	}
 
-	function pesanDariPerawat(){
-		$id_perawat = $this->input->post('id_perawat');
+	function createPesanPerawat() {
+		if ($this->session->userdata('role') != 'perawat') {
+            redirect('auth');
+            return;
+		}
+
+		$id_perawat = $this->session->userdata('id');
 		$pesan = $this->input->post('pesan');
 		$id_pasien = $this->input->post('id_pasien');
-		$pengirim = array('id_pasien' => $id_pasien, 
-						  'id_perawat' => $id_perawat,
-						  'pesan' => $pesan,
-						  'pengirim' => 'perawat'); 
-		$this->pesan_model->mengirimPesan($pengirim);
+		$data = array(
+			'id_pasien' => $id_pasien, 
+			'id_perawat' => $id_perawat,
+			'pesan' => $pesan,
+			'pengirim' => $this->session->userdata('role')
+		);
+		if (! $this->pesan_model->createPesan($data)) {
+			$this->session->set_flashdata('danger', 'Pesan gagal dikirim');
+			redirect('perawat/pesan/'.$this->input->post('id_pasien'));
+			return;
+		}
+
+		$this->session->set_flashdata('success', 'Pesan berhasil dikirim');
+		redirect('perawat/pesan/'.$this->input->post('id_pasien'));
 	}
 
-	function tampilkanPesanDisisiPerawat(){
-		$id_perawat = $this->input->post('id_perawat');
-		$this->pesan_model->tampilkanPesanPerawat($id_perawat);
-	} 
+	function createPesanPasien() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
 
-	function pesanDariPasien(){
-		$id_pasien = $this->input->post('id_pasien');
+		$id_pasien = $this->session->userdata('id');
 		$pesan = $this->input->post('pesan');
-		$data = $this->pasien_model->getPasienById($id_pasien);
-		$pengirim = array('id_pasien' => $id_pasien, 
-						  'id_perawat' => $data->id_perawat,
-						  'pesan' => $pesan,
-						  'pengirim' => 'pasien'); 
-		$this->pesan_model->mengirimPesan($pengirim);
-	}
+		$this->load->model('pasien_model');
+		$pasien = $this->pasien_model->getPasienById($id_pasien);
+		$data = array(
+			'id_pasien' => $id_pasien, 
+			'id_perawat' => $pasien->id_perawat,
+			'pesan' => $pesan,
+			'pengirim' => $this->session->userdata('role')
+		);
+		if (! $this->pesan_model->createPesan($data)) {
+			$this->session->set_flashdata('danger', 'Pesan gagal dikirim');
+			redirect('pasien/pesan');
+			return;
+		}
 
-	function tampilkanPesanDisisiPasien(){
-		$id_pasien = $this->input->post('id_pasien');
-		$this->pesan_model->tampilkanPesanPasient($id_pasien);
+		$this->session->set_flashdata('success', 'Pesan berhasil dikirim');
+		redirect('pasien/pesan');
 	} 
 }

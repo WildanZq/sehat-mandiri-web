@@ -7,22 +7,24 @@ class laporan_model extends CI_Model {
         $this->load->model('service_model');
 	}
 
-	function mengirimPesan($data){
-		$this->db->insert('pesan',$data);
+	function createPesan($data) {
+		$this->db->insert('pesan', $this->service_model->escape_array($data));
 		if ($this->db->affected_rows() == 0) return false;
         return true;
 	}
 
-	function tampilkanPesanPasient($id_pasien){
+	function getPesanByIdPasien($id) {
 		return $this->db
-		->where('id_pasien', $this->db->escape_str($id_pasien))
+		->where('id_pasien', $this->db->escape_str($id))
 		->get('pesan')
-		->row();
+		->result();
 	}
 
-	function tampilkanPesanPerawat($id_perawat, $id_pasien){//karena perawat bisa punya banyak pesien tapi pasien punya satu perawat
+	function getPesanByIdPerawatAndIdPasien($id_perawat, $id_pasien) {
 		return $this->db
-		->get_where('pesan', array('id_perawat' => $id_perawat,'id_pasien' => $id_pasien) )
-		->row();
+		->where('id_pasien', $this->db->escape_str($id_pasien))
+		->where('id_perawat', $this->db->escape_str($id_perawat))
+		->get('pesan')
+		->result();
 	}
 }

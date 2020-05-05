@@ -20,6 +20,11 @@ class Pasien extends CI_Controller {
 	}
 
 	public function createPasien() {
+		if ($this->session->userdata('role') != 'perawat') {
+            redirect('auth');
+            return;
+		}
+
 		$noHp = $this->input->post('no_hp');
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$nama_pasien = $this->input->post('nama_pasien');
@@ -32,7 +37,7 @@ class Pasien extends CI_Controller {
 			'usia' => $usia,
 			'no_hp' => $noHp,
 			'password' => $password,
-			'id_perawat' => $this->session->userdata('id') 
+			'id_perawat' => $this->session->userdata('id')
 		);
 		
 		if (! $this->pasien_model->createPasien($array)) {
@@ -46,11 +51,20 @@ class Pasien extends CI_Controller {
 	}
 
 	function deletePasien(){
+		if ($this->session->userdata('role') != 'perawat') {
+            redirect('auth');
+            return;
+		}
+
 		$id = $this->uri->segment(3);
-		$where = array('id_pasien' => $id);
-		$this->pasien_model->deletePasien($where);
-		redirect('perawat','refresh');
+		if (! $this->pasien_model->deletePasien($id)) {
+			$this->session->set_flashdata('danger','Pasien gagal dihapus');
+			redirect('perawat');
+			return;
+		}
+
+		$this->session->set_flashdata('success','Pasien berhasil dihapus');
+		redirect('perawat');
 	}
 
-	
 }

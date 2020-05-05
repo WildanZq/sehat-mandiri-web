@@ -35,11 +35,12 @@ class pasien_model extends CI_Model {
 	}
 
 
-	function deletePasien($data){
-		$this->db->delete('pasien',$data);
+	function deletePasien($id){
+		$this->db
+		->where('id_pasien', $this->db->escape_str($id))
+		->delete('pasien');
 		if ($this->db->affected_rows() == 0) return false;
         return true;
-
 	}
 
 
