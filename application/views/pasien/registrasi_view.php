@@ -38,39 +38,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
     <div class="w-100 px-4 px-md-5 pt-2 pt-md-3 pb-4 overflow-hidden relative">
         <h1 class="display-3 mt-5 pt-5 mb-2 mb-md-3">Tambah Pasien</h1>
-        <form class="form-sm" method="POST" action="<?php echo base_url('pasien/createPasien'); ?>">
-            <?php
-            if ($this->session->flashdata('danger')) {
-                echo '<div class="alert alert-danger mt-4" role="alert">'.$this->session->flashdata('danger').'</div>';
-            }
-            ?>
-            <div class="form-group">
-                <label for="no_hp">Nomor HP</label>
-                <input class="form-control" type="text" name="no_hp" placeholder="08xxxxxxxxxx" id="no_hp" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input class="form-control" type="password" name="password" placeholder="******" id="password" required>
-            </div>
-            <div class="form-group">
-                <label for="nama">Nama Lengkap</label>
-                <input class="form-control" type="text" name="nama_pasien" placeholder="Doni" id="nama" required>
-            </div>
-            <div class="form-group">
-                <label for="jk">Jenis Kelamin</label>
-                <select class="form-control" name="jenis_kelamin" id="jk" required>
-                    <option value="1">Laki-laki</option>
-                    <option value="0">Perempuan</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="usia">Usia</label>
-                <input class="form-control" type="number" name="usia" placeholder="30" id="usia" required>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-warning shadow" type="submit">Tambah</button>
-            </div>
-        </form>
+        <div class="row">
+            <form class="col-md-6" method="POST" action="<?php echo base_url('pasien/createPasien'); ?>">
+                <?php
+                if ($this->session->flashdata('danger')) {
+                    echo '<div class="alert alert-danger mt-4" role="alert">'.$this->session->flashdata('danger').'</div>';
+                }
+                ?>
+                <div class="form-group">
+                    <label for="no_hp">Nomor HP</label>
+                    <input class="form-control" type="text" name="no_hp" placeholder="08xxxxxxxxxx" id="no_hp" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" placeholder="******" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input class="form-control" type="text" name="nama_pasien" placeholder="Doni" id="nama" required>
+                </div>
+                <div class="form-group">
+                    <label for="jk">Jenis Kelamin</label>
+                    <select class="form-control" name="jenis_kelamin" id="jk" required>
+                        <option value="1">Laki-laki</option>
+                        <option value="0">Perempuan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="usia">Usia</label>
+                    <input class="form-control" type="number" name="usia" placeholder="30" id="usia" required>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-warning shadow" type="submit">Tambah</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="<?php echo base_url('assets/js/nav.js'); ?>"></script>
 </body>

@@ -13,6 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
     <img class="logo absolute" src="<?php echo base_url('assets\icon\logo.svg'); ?>" alt="LOGO">
+    <nav class="nav">
+        <div class="nav-wrapper">
+            <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('perawat/registrasi'); ?>">Daftar Sekarang</a>
+        </div>
+    </nav>
     <div class="w-100 h-100vh px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative">
         <h1 class="display-3 mt-5 pt-5 mb-2">Periksa di Rumah</h1>
         <p>Bergabung sekarang untuk dapat memantau kondisi pasien setiap hari secara daring</p>
@@ -24,6 +29,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="px-3 px-md-5 py-2" id="login-perawat">
                 <h1 class="h2 mb-md-4 mb-3">Masuk Sebagai Perawat</h1>
+                <?php
+                if ($this->session->flashdata('success')) {
+                    echo '<div class="alert alert-success" role="alert">'.$this->session->flashdata('success').'</div>';
+                }
+                ?>
                 <?php
                 if ($this->session->flashdata('danger')) {
                     echo '<div class="alert alert-danger" role="alert">'.$this->session->flashdata('danger').'</div>';
