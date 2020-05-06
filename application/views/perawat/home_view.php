@@ -37,7 +37,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </nav>
     <div class="w-100 px-4 px-md-5 pt-2 pt-md-3 overflow-hidden relative pb-4">
-        <h1 class="display-3 mt-5 pt-5 mb-2 mb-md-3">Daftar Pasien</h1>
+        <div class="d-flex justify-content-between align-items-md-end flex-column flex-md-row">
+            <h1 class="display-3 mt-5 pt-5 mb-2 mb-md-3">Daftar Pasien</h1>
+            <form action="" method="get">
+                <div class="input-group mb-md-3">
+                    <input class="form-control" type="text" name="query" placeholder="Cari nama pasien..." value="<?php echo $this->input->get('query'); ?>">
+                    <div class="input-group-append">
+                        <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2">Cari</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <?php
         if ($this->session->flashdata('success')) {
             echo '<div class="alert alert-success mt-4" role="alert">'.$this->session->flashdata('success').'</div>';
@@ -53,7 +63,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="d-flex flex-column flex-md-row align-items-center w-100">
                 <img src="<?php echo base_url('assets/img/patient.svg'); ?>" alt="pasien" height="200">
                 <div class="ml-md-3 mt-3 mt-md-0 text-center text-md-left">
+                    <?php if ($this->input->get('query')) { ?>
+                    <h3>Pasien tidak ditemukan</h3>
+                    <?php } else { ?>
                     <h3>Belum ada Pasien</h3>
+                    <?php } ?>
                     <p>Silakan membuat akun pasien</p>
                     <a class="btn btn-warning mt-2" href="<?php echo base_url('perawat/registrasiPasien'); ?>">Tambah Pasien</a>
                 </div>

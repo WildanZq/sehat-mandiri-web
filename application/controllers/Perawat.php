@@ -12,9 +12,16 @@ class Perawat extends CI_Controller {
 			redirect('auth');
 			return;
 		}
+
 		$this->load->model('pasien_model');
-        $idPerawat = $this->session->userdata('id');
-        $pasien = $this->pasien_model->getPasienByIdPerawat($idPerawat);
+		$idPerawat = $this->session->userdata('id');
+		$pasien = [];
+
+		if ($this->input->get('query')) {
+			$pasien = $this->pasien_model->getPasienByIdPerawatAndLikeName($idPerawat, $this->input->get('query'));
+		} else {
+			$pasien = $this->pasien_model->getPasienByIdPerawat($idPerawat);
+		}
         $data = [
         	'pasien' => $pasien
         ];
@@ -83,9 +90,9 @@ class Perawat extends CI_Controller {
 		}
 
 		$array = array(
-				'username' => $username,
-				'password' => $password,
-				'nama_perawat' => $nama_perawat,
+			'username' => $username,
+			'password' => $password,
+			'nama_perawat' => $nama_perawat,
 		);
 
 		if (!$username || !$password || !$nama_perawat) {
@@ -116,7 +123,13 @@ class Perawat extends CI_Controller {
 		$passwordLama = $this->input->post('pass_lama');
 		$perawat = $this->perawat_model->getPerawatById($id);
 
-	   if (! password_verify($passwordLama, $perawat->password)) {
+		if (!$passwordBaru) {
+			$this->session->set_flashdata('danger', 'Masukkan semua data');
+			redirect('perawat/account');
+			return;
+		}
+
+	   	if (! password_verify($passwordLama, $perawat->password)) {
 			$this->session->set_flashdata('danger', 'Password salah');
 			redirect('perawat/account');
 			return;

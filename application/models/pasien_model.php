@@ -51,4 +51,12 @@ class pasien_model extends CI_Model {
         return true;
 	}
 
+	public function getPasienByIdPerawatAndLikeName($idPerawat, $name) {
+		return $this->db
+		->where('id_perawat', $this->db->escape_str($idPerawat))
+		->like('nama_pasien', $this->db->escape_str($name))
+		->get('pasien')
+		->result();
+	}
+
 }

@@ -58,8 +58,8 @@ class Pasien extends CI_Controller {
 			redirect('perawat/registrasiPasien');
 		}
 
-		if (!$noHp || !$password || !$nama_pasien) {
-			$this->session->set_flashdata('danger','Masukkan semua data');
+		if (!$noHp || !$password || !$nama_pasien || $jenis_kelamin == '' || !$usia) {
+			$this->session->set_flashdata('danger', 'Masukkan semua data');
 			redirect('perawat/registrasiPasien');
 			return;
 		}
@@ -118,6 +118,12 @@ class Pasien extends CI_Controller {
 		$passwordBaru = $this->input->post('pass_baru');
 		$passwordLama = $this->input->post('pass_lama');
 		$pasien = $this->pasien_model->getPasienById($id);
+
+		if (!$passwordBaru) {
+			$this->session->set_flashdata('danger', 'Masukkan semua data');
+			redirect('pasien/account');
+			return;
+		}
 
 		if (! password_verify($passwordLama, $pasien->password)) {
 			$this->session->set_flashdata('danger', 'Password salah');
