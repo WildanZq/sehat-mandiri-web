@@ -84,9 +84,10 @@ class Perawat extends CI_Controller {
 		$nama_perawat = $this->input->post('nama_perawat');
 		$this->load->model('perawat_model');
 		$data = $this->perawat_model->getPerawatByUsername($username);
-		if($data){
+		if ($data) {
 			$this->session->set_flashdata('danger', 'Username telah terdaftar sebelumnya');
 			redirect('perawat/registrasi');
+			return;
 		}
 
 		$array = array(

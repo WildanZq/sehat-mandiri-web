@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="input-group mb-md-3">
                     <input class="form-control" type="text" name="query" placeholder="Cari nama pasien..." value="<?php echo $this->input->get('query'); ?>">
                     <div class="input-group-append">
-                        <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2">Cari</button>
+                        <button type="submit" class="input-group-text btn btn-warning bg-warning" id="basic-addon2">Cari</button>
                     </div>
                 </div>
             </form>

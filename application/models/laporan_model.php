@@ -20,4 +20,19 @@ class laporan_model extends CI_Model {
 		->result();
 	}
 
+	function getLaporanById($id){
+		return $this->db
+		->where('id_laporan', $this->db->escape_str($id))
+		->get('laporan')
+		->row();
+	}
+
+	function deleteLaporan($id){
+		$this->db
+		->where('id_laporan', $this->db->escape_str($id))
+		->delete('laporan');
+		if ($this->db->affected_rows() == 0) return false;
+        return true;
+	}
+
 }

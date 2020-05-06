@@ -51,4 +51,35 @@ class Laporan extends CI_Controller {
 		redirect('pasien');
 	}
 
+	function deleteLaporan() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
+
+		$id = $this->uri->segment(3);
+		$laporan = $this->laporan_model->getLaporanById($id);
+
+		if (!$laporan) {
+			$this->session->set_flashdata('danger','Laporan gagal dihapus');
+			redirect('pasien');
+			return;
+		}
+
+		if ($laporan->id_pasien != $this->session->userdata('id')) {
+			$this->session->set_flashdata('danger','Laporan gagal dihapus');
+			redirect('pasien');
+			return;
+		}
+
+		if (! $this->laporan_model->deleteLaporan($id)) {
+			$this->session->set_flashdata('danger','Pasien gagal dihapus');
+			redirect('pasien');
+			return;
+		}
+
+		$this->session->set_flashdata('success','Laporan berhasil dihapus');
+		redirect('pasien');
+	}
+
 }

@@ -53,9 +53,10 @@ class Pasien extends CI_Controller {
 
 		$this->load->model('pasien_model');
 		$data = $this->pasien_model->getPasienByNoHp($noHp);
-		if($data){
-			$this->session->set_flashdata('danger', 'Nomor Telephone telah terdaftar sebelumnya');
+		if ($data) {
+			$this->session->set_flashdata('danger', 'Nomor HP telah terdaftar sebelumnya');
 			redirect('perawat/registrasiPasien');
+			return;
 		}
 
 		if (!$noHp || !$password || !$nama_pasien || $jenis_kelamin == '' || !$usia) {
@@ -90,6 +91,20 @@ class Pasien extends CI_Controller {
 		}
 
 		$id = $this->uri->segment(3);
+		$pasien = $this->pasien_model->getPasienById($id);
+
+		if (!$pasien) {
+			$this->session->set_flashdata('danger','Pasien gagal dihapus');
+			redirect('perawat');
+			return;
+		}
+
+		if ($pasien->id_perawat != $this->session->userdata('id')) {
+			$this->session->set_flashdata('danger','Pasien gagal dihapus');
+			redirect('perawat');
+			return;
+		}
+
 		if (! $this->pasien_model->deletePasien($id)) {
 			$this->session->set_flashdata('danger','Pasien gagal dihapus');
 			redirect('perawat');

@@ -77,6 +77,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <a href="<?php echo base_url('pasien/createLaporan'); ?>" class="btn btn-warning btn-sm mb-4 shadow">Tambah Laporan</a>
                 </div>
                 <?php
+                if ($this->session->flashdata('danger')) {
+                    echo '<div class="alert alert-danger" role="alert">'.$this->session->flashdata('danger').'</div>';
+                }
+                ?>
+                <?php
                 if ($this->session->flashdata('success')) {
                     echo '<div class="alert alert-success" role="alert">'.$this->session->flashdata('success').'</div>';
                 }
@@ -95,7 +100,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 foreach ($rlaporan as $key => $value) {
                     $date = date("d M Y H:i", strtotime($value->waktu));
                     echo '
-                    <h3 class="h5 font-weight-normal mb-3 text-primary">'.$date.'</h3>
+                    <div class="d-flex justify-content-between">
+                        <h3 class="h5 font-weight-normal mb-3 text-primary">'.$date.'</h3>
+                        <a onclick="deleteLaporan(\''.base_url('laporan/deleteLaporan/').$value->id_laporan.'\')" class="text-danger" href="#">Hapus</a>
+                    </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <table class="w-100">
@@ -140,6 +148,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script>
         const pesan = document.getElementById('pesan');
         pesan.scrollTop = pesan.scrollHeight - pesan.clientHeight;
+
+        function deleteLaporan(link) {
+            if (confirm('Hapus data laporan?')) {
+                window.location.href = link;
+            }
+        }
     </script>
 </body>
 </html>
