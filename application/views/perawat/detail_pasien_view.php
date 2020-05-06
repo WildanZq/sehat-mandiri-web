@@ -55,9 +55,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td><?php echo $pasien->no_hp; ?></td>
                     </tr>
                 </table>
-                <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto">
-                    <h2 class="h5 ml-1 mt-2">Pesan</h2>
-                    <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-dark" id="pesan">
+                <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto shadow">
+                    <h2 class="h4 mb-3 ml-1 mt-2">Pesan</h2>
+                    <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-white" id="pesan">
                         <?php
                         foreach ($pesan as $key => $value) {
                             $waktu = date("H:i", strtotime($value->waktu));

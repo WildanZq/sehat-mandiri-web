@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <img class="logo absolute fixed-md" src="<?php echo base_url('assets\icon\logo.svg'); ?>" alt="LOGO">
     <nav class="mobile-nav" id="nav-mobile">
         <div class="nav-mobile-wrapper">
+            <a class="mb-3 text-white font-weight-bold" href="<?php echo base_url('pasien'); ?>">Beranda</a>
             <a class="mb-3 text-white font-weight-bold" href="<?php echo base_url('pasien/account'); ?>">
                 <?php echo $this->session->userdata('nama'); ?>
             </a>
@@ -27,6 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <button class="btn btn-sm btn-primary shadow nav-mobile-btn" id="nav-btn"><span></span></button>
             </div>
             <div class="d-none d-md-block">
+                <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('pasien'); ?>">Beranda</a>
                 <a class="btn btn-sm btn-primary shadow" href="<?php echo base_url('pasien/account'); ?>">
                     <?php echo $this->session->userdata('nama'); ?>
                 </a>
@@ -39,9 +41,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-6 d-none d-md-block"></div>
             <div class="col-md-6 relative fixed-md d-flex flex-column detail-pasien-wrapper">
                 <h1 class="display-3 mt-md-5 pt-5 mb-2"></h1>
-                <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto">
-                    <h2 class="h5 ml-1 mt-2">Pesan dengan <?php echo $perawat->nama_perawat; ?></h2>
-                    <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-dark" id="pesan">
+                <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto shadow">
+                    <h2 class="h4 mb-3 ml-1 mt-2">Pesan dengan <?php echo $perawat->nama_perawat; ?></h2>
+                    <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-white" id="pesan">
                         <?php
                         foreach ($pesan as $key => $value) {
                             $waktu = date("H:i", strtotime($value->waktu));
@@ -62,8 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="col-md-6 mt-md-5 pt-md-5">
                 <div class="d-flex justify-content-between align-items-end">
-                    <h2 class="h3 mb-4 mt-md-0 mt-3 pt-md-5">Riwayat Laporan</h2>
-                    <a href="<?php echo base_url('pasien/createLaporan'); ?>" class="btn btn-warning btn-sm mb-4">Tambah Laporan</a>
+                    <h2 class="h3 mb-4 mt-md-0 mt-4 pt-md-5">Riwayat Laporan</h2>
+                    <a href="<?php echo base_url('pasien/createLaporan'); ?>" class="btn btn-warning btn-sm mb-4 shadow">Tambah Laporan</a>
                 </div>
                 <?php
                 $rlaporan = array_reverse($laporan);

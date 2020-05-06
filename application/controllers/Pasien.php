@@ -31,6 +31,14 @@ class Pasien extends CI_Controller {
 		$this->load->view('pasien/home_view', $data);
 	}
 
+	public function account() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
+		$this->load->view('pasien/account_view');
+	}
+
 	public function createPasien() {
 		if ($this->session->userdata('role') != 'perawat') {
             redirect('auth');
@@ -77,6 +85,34 @@ class Pasien extends CI_Controller {
 
 		$this->session->set_flashdata('success','Pasien berhasil dihapus');
 		redirect('perawat');
+	}
+
+	public function changePassword() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
+
+		$id = $this->session->userdata('id');
+		$passwordBaru = $this->input->post('pass_baru');
+		$passwordLama = $this->input->post('pass_lama');
+		$pasien = $this->pasien_model->getPasienById($id);
+
+		if (! password_verify($passwordLama, $pasien->password)) {
+			$this->session->set_flashdata('danger', 'Password salah');
+			redirect('pasien/account');
+			return;
+		}
+
+		$password = password_hash($passwordBaru, PASSWORD_DEFAULT);
+		if (! $this->pasien_model->changePassword($id, $password)) {
+			$this->session->set_flashdata('danger', 'Password gagal diganti');
+			redirect('pasien/account');
+			return;
+		}
+
+		$this->session->set_flashdata('success', 'Password berhasil diganti');
+		redirect('pasien/account');
 	}
 
 }

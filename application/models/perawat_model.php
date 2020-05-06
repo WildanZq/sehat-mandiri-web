@@ -29,11 +29,11 @@ class perawat_model extends CI_Model{
 
 	public function changePassword($id, $password) {
 		return $this->db
+		->set('password', $this->db->escape_str($password))
 		->where('id_perawat', $this->db->escape_str($id))
-		->update('perawat', $this->db->escape_str($password));
+		->update('perawat');
 		if ($this->db->affected_rows() == 0) return false;
         return true;
 	}
-
 
 }

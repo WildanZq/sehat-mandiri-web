@@ -249,6 +249,10 @@ a.decoration-0:hover {
     .fixed-md {
         position: relative;
     }
+    .pasien-card.create {
+        height: auto;
+        padding: 1rem 0;
+    }
     .detail-pasien-wrapper {
         height: 80vh;
         padding-right: 15px;

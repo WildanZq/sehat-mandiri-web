@@ -21,6 +21,14 @@ class Perawat extends CI_Controller {
 		$this->load->view('perawat/home_view', $data);
 	}
 
+	public function account() {
+		if ($this->session->userdata('role') != 'perawat') {
+			redirect('auth');
+			return;
+		}
+		$this->load->view('perawat/account_view');
+	}
+
 	public function registrasiPasien() {
     	if ($this->session->userdata('role') != 'perawat') {
 			redirect('auth');
@@ -92,10 +100,10 @@ class Perawat extends CI_Controller {
 		$id = $this->session->userdata('id');
 		$passwordBaru = $this->input->post('pass_baru');
 		$passwordLama = $this->input->post('pass_lama');
-		$perawat = $this->perawat_model->getPerawatById($id_perawat);
+		$perawat = $this->perawat_model->getPerawatById($id);
 
-		if (! password_verify($passwordBaru, $perawat->password)) {
-			$this->session->set_flashdata('danger', 'Password tidak valid');
+		if (! password_verify($passwordLama, $perawat->password)) {
+			$this->session->set_flashdata('danger', 'Password salah');
 			redirect('perawat/account');
 			return;
 		}
@@ -109,7 +117,6 @@ class Perawat extends CI_Controller {
 
 		$this->session->set_flashdata('success', 'Password berhasil diganti');
 		redirect('perawat/account');
-	} 
-
+	}
 
 }

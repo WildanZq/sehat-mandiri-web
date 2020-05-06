@@ -49,6 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         ?>
         <div class="pasien-wrapper row mt-4">
+            <a href="<?php echo base_url('perawat/registrasiPasien'); ?>" class="col-lg-3 col-md-4 decoration-0">
+                <div class="card pasien-card shadow-sm create shadow">
+                    <span class="font-weight-bold h5">Tambah Pasien</span>
+                </div>
+            </a>
             <?php
             foreach ($pasien as $key => $value) {
                 $jk = $value->jk == 1 ? 'Laki-laki' : 'Perempuan';
@@ -73,11 +78,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ";
             }
             ?>
-            <a href="<?php echo base_url('perawat/registrasiPasien'); ?>" class="col-lg-3 col-md-4 decoration-0">
-                <div class="card pasien-card shadow-sm create shadow">
-                    <span class="font-weight-bold h5">Tambah Pasien</span>
-                </div>
-            </a>
         </div>
     </div>
     <script src="<?php echo base_url('assets/js/nav.js'); ?>"></script>

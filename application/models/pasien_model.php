@@ -34,7 +34,6 @@ class pasien_model extends CI_Model {
 		->row();	
 	}
 
-
 	function deletePasien($id){
 		$this->db
 		->where('id_pasien', $this->db->escape_str($id))
@@ -43,5 +42,13 @@ class pasien_model extends CI_Model {
         return true;
 	}
 
+	public function changePassword($id, $password) {
+		return $this->db
+		->set('password', $this->db->escape_str($password))
+		->where('id_pasien', $this->db->escape_str($id))
+		->update('pasien');
+		if ($this->db->affected_rows() == 0) return false;
+        return true;
+	}
 
 }
