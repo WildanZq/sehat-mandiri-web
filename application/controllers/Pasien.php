@@ -51,6 +51,12 @@ class Pasien extends CI_Controller {
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$usia = $this->input->post('usia');
 
+		if (!$noHp || !$password || !$nama_pasien || !$jenis_kelamin || !$usia) {
+			$this->session->set_flashdata('danger','Masukkan semua data');
+			redirect('perawat/registrasiPasien');
+			return;
+		}
+
 		$array = array(
 			'nama_pasien' => $nama_pasien,
 			'jk' => $jenis_kelamin,
@@ -62,7 +68,7 @@ class Pasien extends CI_Controller {
 		
 		if (! $this->pasien_model->createPasien($array)) {
 			$this->session->set_flashdata('danger','Pasien gagal didaftarkan');
-			redirect('pasien/registrasi');
+			redirect('perawat/registrasiPasien');
 			return;
 		}
 

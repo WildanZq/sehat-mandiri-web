@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <div class="form-group">
                             <label for="keluhan">Keluhan Lainnya</label>
-                            <input class="form-control" type="text" name="keluhan" placeholder="Keluhan" id="keluhan" required>
+                            <input class="form-control" type="text" name="keluhan" placeholder="Keluhan" id="keluhan">
                         </div>
                     </div>
                 </div>
