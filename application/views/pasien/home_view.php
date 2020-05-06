@@ -76,6 +76,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h2 class="h3 mb-4 mt-md-0 mt-4 pt-md-5">Riwayat Laporan</h2>
                     <a href="<?php echo base_url('pasien/createLaporan'); ?>" class="btn btn-warning btn-sm mb-4 shadow">Tambah Laporan</a>
                 </div>
+                <?php
+                if ($this->session->flashdata('success')) {
+                    echo '<div class="alert alert-success" role="alert">'.$this->session->flashdata('success').'</div>';
+                }
+                ?>
                 <?php if (count($laporan) == 0) { ?>
                 <div class="d-flex flex-column flex-md-row align-items-center">
                     <img src="<?php echo base_url('assets/img/document.svg'); ?>" alt="doc" height="160">

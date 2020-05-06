@@ -87,6 +87,14 @@ class Pasien extends CI_Controller {
 		redirect('perawat');
 	}
 
+	public function createLaporan() {
+		if ($this->session->userdata('role') != 'pasien') {
+            redirect('auth');
+            return;
+		}
+		$this->load->view('pasien/create_laporan_view');
+	}
+
 	public function changePassword() {
 		if ($this->session->userdata('role') != 'pasien') {
             redirect('auth');

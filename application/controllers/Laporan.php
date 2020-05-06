@@ -7,7 +7,8 @@ class Laporan extends CI_Controller {
 		if (! $this->session->userdata('logged_in')) {
             redirect('auth');
             return;
-        }
+		}
+		$this->load->model('laporan_model');
 	}
 
 	public function createLaporan(){
