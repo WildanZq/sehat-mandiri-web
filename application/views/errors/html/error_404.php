@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<img src="<?php echo config_item('base_url'); ?>assets/img/404.svg" alt="404" height="200">
 		<h1 class="mt-2"><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
-		<a class="btn btn-primary" href="<?php echo config_item('base_url'); ?>">Back to Home</a>
+		<a class="btn btn-warning shadow" href="<?php echo config_item('base_url'); ?>">Back to Home</a>
 	</div>
 </body>
 </html>

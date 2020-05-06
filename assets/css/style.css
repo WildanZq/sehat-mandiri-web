@@ -243,6 +243,10 @@ a.decoration-0:hover {
     :root {
         --h-spacing: 1.5rem;
     }
+    .login-wrapper {
+        position: relative;
+        margin-top: 56px;
+    }
     .mobile-nav.active {
         height: 100vh;
     }
