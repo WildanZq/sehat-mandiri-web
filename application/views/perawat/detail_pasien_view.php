@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form action="<?php echo base_url('pesan/createPesanPerawat'); ?>" method="post">
                             <div class="form-group mb-0 mt-1 d-flex">
                                 <input class="d-none" type="text" name="id_pasien" value="<?php echo $this->uri->segment(3); ?>">
-                                <input class="form-control" type="text" name="pesan" placeholder="Ketik pesan...">
+                                <input class="form-control" type="text" name="pesan" placeholder="Ketik pesan..." autocomplete="off">
                                 <button type="submit" class="btn btn-warning">Kirim</button>
                             </div>
                         </form>

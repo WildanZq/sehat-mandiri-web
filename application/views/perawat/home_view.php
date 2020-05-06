@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </table>
                         </div>
                         <div class=\"card-footer bg-white border-top-0 d-flex justify-content-between pt-0\">
-                            <a class=\"text-danger\" href=\"".base_url("pasien/deletePasien/$value->id_pasien")."\">Hapus</a>
+                            <a class=\"text-danger\" onclick=\"deletePasien('".base_url("pasien/deletePasien/$value->id_pasien")."')\" href=\"#\">Hapus</a>
                             <a href=\"".base_url("perawat/detailPasien/$value->id_pasien")."\">Lihat detail</a>
                         </div>
                     </div>
@@ -92,5 +92,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
     <script src="<?php echo base_url('assets/js/nav.js'); ?>"></script>
+    <script>
+        function deletePasien(link) {
+            if (confirm('Hapus data pasien?')) {
+                window.location.href = link;
+            }
+        }
+    </script>
 </body>
 </html>
