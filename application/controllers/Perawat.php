@@ -18,6 +18,7 @@ class Perawat extends CI_Controller {
         $data = [
         	'pasien' => $pasien
         ];
+       
 		$this->load->view('perawat/home_view', $data);
 	}
 
@@ -74,15 +75,28 @@ class Perawat extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$nama_perawat = $this->input->post('nama_perawat');
+		$this->load->model('perawat_model');
+		$data = $this->perawat_model->getPerawatByUsername($username);
+		if($data){
+			$this->session->set_flashdata('danger', 'Username telah terdaftar sebelumnya');
+			redirect('perawat/registrasi');
+		}
 
 		$array = array(
-			'username' => $username,
-			'password' => $password,
-			'nama_perawat' => $nama_perawat,
+				'username' => $username,
+				'password' => $password,
+				'nama_perawat' => $nama_perawat,
 		);
-		if (! $this->perawat_model->createPerawat($array)) {
+
+		if (!$username || !$password || !$nama_perawat) {
+			$this->session->set_flashdata('danger','Masukkan semua data');
+			redirect('Auth');
+			return;
+		}
+
+		if (!$this->perawat_model->createPerawat($array)) {
 			$this->session->set_flashdata('danger', 'Anda gagal daftar');
-			redirect('Auth/registrasi');
+			redirect('perawat/registrasi');
 			return;
 		}
 
@@ -102,7 +116,7 @@ class Perawat extends CI_Controller {
 		$passwordLama = $this->input->post('pass_lama');
 		$perawat = $this->perawat_model->getPerawatById($id);
 
-		if (! password_verify($passwordLama, $perawat->password)) {
+	   if (! password_verify($passwordLama, $perawat->password)) {
 			$this->session->set_flashdata('danger', 'Password salah');
 			redirect('perawat/account');
 			return;

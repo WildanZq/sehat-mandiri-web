@@ -25,6 +25,12 @@ class Laporan extends CI_Controller {
 		$tenggorokan = $this->input->post('tenggorokan');
 		$keluhan = $this->input->post('keluhan');
 
+		if (!$id_pasien || !$suhu || !$demam) {
+			$this->session->set_flashdata('danger','Masukkan semua data');
+			redirect('pasien/createLaporan');
+			return;
+		}
+
 		$array = array(
 			'id_pasien' => $id_pasien,
 			'suhu_tubuh' => $suhu,
@@ -34,6 +40,9 @@ class Laporan extends CI_Controller {
 			'sakit_tenggorokan' => $tenggorokan,
 			'lainnya' => $keluhan
 		);
+
+
+
 
 		if (! $this->laporan_model->createLaporan($array)) {
 			$this->session->set_flashdata('danger','Laporan gagal ditambahkan');
