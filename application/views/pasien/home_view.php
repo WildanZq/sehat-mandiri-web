@@ -44,6 +44,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="bg-primary pesan-wrapper flex-2 mt-3 p-2 d-flex flex-column overflow-auto shadow">
                     <h2 class="h4 mb-3 ml-1 mt-2">Pesan dengan <?php echo $perawat->nama_perawat; ?></h2>
                     <div class="pesan-container px-md-3 px-2 py-2 bg-white flex-2 text-dark overflow-auto border border-white" id="pesan">
+                        <?php if (count($pesan) == 0) { ?>
+                        <div class="h-100 w-100 d-flex flex-column flex-md-row justify-content-center align-items-center text-center">
+                            <img src="<?php echo base_url('assets/img/chat.svg'); ?>" alt="chat" height="140">
+                            <div class="ml-md-3 mt-3 mt-md-0 text-center text-md-left">
+                                <h5>Belum ada pesan</h5>
+                                <p>Kirim pesan dengan perawat Anda</p>
+                            </div>
+                        </div>
+                        <?php } ?>
                         <?php
                         foreach ($pesan as $key => $value) {
                             $waktu = date("H:i", strtotime($value->waktu));
@@ -67,6 +76,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h2 class="h3 mb-4 mt-md-0 mt-4 pt-md-5">Riwayat Laporan</h2>
                     <a href="<?php echo base_url('pasien/createLaporan'); ?>" class="btn btn-warning btn-sm mb-4 shadow">Tambah Laporan</a>
                 </div>
+                <?php if (count($laporan) == 0) { ?>
+                <div class="d-flex flex-column flex-md-row align-items-center">
+                    <img src="<?php echo base_url('assets/img/document.svg'); ?>" alt="doc" height="160">
+                    <div class="ml-md-3 mt-3 mt-md-0 text-center text-md-left">
+                        <h5>Belum ada laporan</h5>
+                        <p>Silakan membuat laporan pertama Anda</p>
+                    </div>
+                </div>
+                <?php } ?>
                 <?php
                 $rlaporan = array_reverse($laporan);
                 foreach ($rlaporan as $key => $value) {

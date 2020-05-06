@@ -49,11 +49,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         ?>
         <div class="pasien-wrapper row mt-4">
+            <?php if (count($pasien) == 0) { ?>
+            <div class="d-flex flex-column flex-md-row align-items-center w-100">
+                <img src="<?php echo base_url('assets/img/patient.svg'); ?>" alt="pasien" height="200">
+                <div class="ml-md-3 mt-3 mt-md-0 text-center text-md-left">
+                    <h3>Belum ada Pasien</h3>
+                    <p>Silakan membuat akun pasien</p>
+                    <a class="btn btn-warning mt-2" href="<?php echo base_url('perawat/registrasiPasien'); ?>">Tambah Pasien</a>
+                </div>
+            </div>
+            <?php } else { ?>
             <a href="<?php echo base_url('perawat/registrasiPasien'); ?>" class="col-lg-3 col-md-4 decoration-0">
                 <div class="card pasien-card shadow-sm create shadow">
                     <span class="font-weight-bold h5">Tambah Pasien</span>
                 </div>
             </a>
+            <?php } ?>
             <?php
             foreach ($pasien as $key => $value) {
                 $jk = $value->jk == 1 ? 'Laki-laki' : 'Perempuan';
