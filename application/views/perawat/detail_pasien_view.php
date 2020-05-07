@@ -68,7 +68,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </div>
                         <?php } ?>
                         <?php
+                        $temp_date = '';
                         foreach ($pesan as $key => $value) {
+                            $date = date("d M Y", strtotime($value->waktu));
+                            if ($temp_date != $date) {
+                                echo "<span class=\"pesan-date my-2 shadow-sm\">$date</span>";
+                                $temp_date = $date;
+                            }
                             $waktu = date("H:i", strtotime($value->waktu));
                             $jenis = $value->pengirim == 'perawat' ? 'out' : 'in';
                             echo "<p class=\"pesan-$jenis\" style=\"--waktu: '$waktu'\">$value->pesan</p>";

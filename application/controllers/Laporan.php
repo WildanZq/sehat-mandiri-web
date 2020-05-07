@@ -73,7 +73,7 @@ class Laporan extends CI_Controller {
 		}
 
 		if (! $this->laporan_model->deleteLaporan($id)) {
-			$this->session->set_flashdata('danger','Pasien gagal dihapus');
+			$this->session->set_flashdata('danger','Laporan gagal dihapus');
 			redirect('pasien');
 			return;
 		}
